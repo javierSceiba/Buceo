@@ -1,0 +1,25 @@
+jasypt:
+   encryptor:
+      password: ${jasyptpwd:secretkey}
+      algorithm: PBEWithMD5AndDES
+
+server:
+   port: 9000
+   servlet:
+      context-path: /reserva
+      session:
+         timeout: 21600s
+
+spring:
+   datasource:
+      driver-class-name: org.h2.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:h2:mem:~/buceo
+      username: admin
+      password: buceo123
+      hikari:
+         poolName: pool
+   h2:
+      console:
+         enabled: true
+         path: /h2-console

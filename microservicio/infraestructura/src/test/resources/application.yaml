@@ -1,0 +1,9 @@
+spring:
+   datasource:
+      driver-class-name: org.h2.Driver
+      jdbcUrl: jdbc:h2:mem:~/buceo
+      username: admin
+      password: buceo123
+      hikari:
+         poolName: pool
+

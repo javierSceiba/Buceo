@@ -1,0 +1,1 @@
+select count(0) from reserva where numero_documento = :numeroDocumento and fecha_reserva  >= :fecha
