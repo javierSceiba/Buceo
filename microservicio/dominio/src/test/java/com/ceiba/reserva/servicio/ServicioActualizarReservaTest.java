@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ServicioActualizarReservaTest {
 
     @Test
@@ -49,5 +51,31 @@ class ServicioActualizarReservaTest {
         servicioActualizarReserva.ejecutar(reserva);
         //assert
         Mockito.verify(repositorioReserva,Mockito.times(1)).actualizar(reserva);
+    }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario nativo")
+    void deberiaCalcularCostoNativo() {
+        // arrange
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioActualizarReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(200000L,costoReserva);
+    }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista")
+    void deberiaCalcularCostoTurista() {
+        // arrange
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioActualizarReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(240000L,costoReserva);
     }
 }

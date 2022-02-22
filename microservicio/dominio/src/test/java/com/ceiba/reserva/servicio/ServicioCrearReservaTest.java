@@ -44,4 +44,30 @@ class ServicioCrearReservaTest {
         assertEquals(10L,idReserva);
         Mockito.verify(repositorioReserva, Mockito.times(1)).crear(reserva);
     }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario nativo")
+    void deberiaCalcularCostoNativo() {
+        // arrange
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(160000L,costoReserva);
+    }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista")
+    void deberiaCalcularCostoTurista() {
+        // arrange
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(200000L,costoReserva);
+    }
 }
