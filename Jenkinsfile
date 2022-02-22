@@ -46,8 +46,8 @@ pipeline {
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.buceo-javier.suarez',
-                sonarName:'CeibaADN-ReservaBuceo(javier.suarez)',
+        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:ReservaBuceo-javier.suarez',
+                sonarName:'''"CeibaADN-ReservaBuceo(javier.suarez)"''',
                 sonarPathProperties:'./sonar-project.properties')
       }
     }
