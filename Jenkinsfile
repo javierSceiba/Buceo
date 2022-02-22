@@ -31,33 +31,33 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
- 		checkout scm
+		checkout scm
       }
     }
-    
+
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-	  sh 'chmod +x microservicio/gradlew'
-	  sh 'microservicio/gradlew --b microservicio/build.gradle test'
+		sh 'chmod +x microservicio/gradlew'
+		sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+		sh './microservicio/gradlew --b microservicio/build.gradle test'
       }
     }
 
     stage('Static Code Analysis') {
-      steps{
-        echo '------------>Análisis de código estático<------------'
-        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.buceo-javier.suarez',
-                sonarName:'''"CeibaADN-ReservaBuceo(javier.suarez)"''',
-                sonarPathProperties:'./sonar-project.properties')
-      }
+        steps{
+            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.buceo-javier.suarez',
+            sonarName:'''"CeibaADN-ReservaBuceo(javier.suarez)"''',
+            sonarPathProperties:'./sonar-project.properties')
+        }
     }
 
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh 'microservicio/gradlew --b microservicio/build.gradle build -x test'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
       }
-    }  
+    }
   }
 
   post {
@@ -66,13 +66,13 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit '**/test-results/test/*.xml'
+      junit '*/test-results/test/.xml'
     }
     failure {
       echo 'This will run only if failed'
       mail (to: 'javier.suarez@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
-
     }
+
     unstable {
       echo 'This will run only if the run was marked as unstable'
     }
