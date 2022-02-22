@@ -22,7 +22,7 @@ public class ConsultaControladorReserva {
     }
 
     @GetMapping(value="/{id}")
-    @ApiOperation("Listar Reservas")
+    @ApiOperation("Consultar reserva")
     public DtoReserva listar(@PathVariable Long id) {
         return this.manejadorListarReservas.ejecutar(id);
     }

@@ -65,6 +65,19 @@ class ServicioActualizarReservaTest {
         //- assert
         assertEquals(200000L,costoReserva);
     }
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario nativo un sabado")
+    void deberiaCalcularCostoNativoSabado() {
+        // arrange
+        LocalDate fechaReserva = LocalDate.of(2022,02,19);
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioActualizarReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(220000L,costoReserva);
+    }
 
     @Test
     @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista")
@@ -77,5 +90,19 @@ class ServicioActualizarReservaTest {
         Long costoReserva = servicioActualizarReserva.calcularCostoReserva(reserva);
         //- assert
         assertEquals(240000L,costoReserva);
+    }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista un día sabado")
+    void deberiaCalcularCostoTuristaSabado() {
+        // arrange
+        LocalDate fechaReserva = LocalDate.of(2022,02,19);
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioActualizarReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(260000L,costoReserva);
     }
 }

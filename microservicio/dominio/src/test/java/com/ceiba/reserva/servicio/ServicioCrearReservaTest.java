@@ -5,6 +5,7 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +22,6 @@ class ServicioCrearReservaTest {
     void deberiaLanzarUnaExepcionCuandoSeValideLaExistenciaDelUsuario() {
         // arrange
         Reserva reserva = new ReservaTestDataBuilder().build();
-        LocalDate fechaHoy = LocalDate.now();
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioReserva.existe(Mockito.anyInt(),any(LocalDate.class))).thenReturn(true);
         ServicioCrearReserva servicioCrearUsuario = new ServicioCrearReserva(repositorioReserva);
@@ -59,6 +59,20 @@ class ServicioCrearReservaTest {
     }
 
     @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario nativo un sabado")
+    void deberiaCalcularCostoNativoSabado() {
+        // arrange
+        LocalDate fechaReserva = LocalDate.of(2022,02,19);
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(180000L,costoReserva);
+    }
+
+    @Test
     @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista")
     void deberiaCalcularCostoTurista() {
         // arrange
@@ -69,5 +83,19 @@ class ServicioCrearReservaTest {
         Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
         //- assert
         assertEquals(200000L,costoReserva);
+    }
+
+    @Test
+    @DisplayName("Deberia calcular el costo de la reserva para tipo de usuario turista un día sabado")
+    void deberiaCalcularCostoTuristaSabado() {
+        // arrange
+        LocalDate fechaReserva = LocalDate.of(2022,02,19);
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        // act
+        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        //- assert
+        assertEquals(220000L,costoReserva);
     }
 }
