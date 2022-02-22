@@ -39,7 +39,7 @@ pipeline {
       steps{
         echo "------------>Compile & Unit Tests<------------"
 	  sh 'chmod +x microservicio/gradlew'
-	  sh './gradlew --b ./build.gradle test'
+	  sh 'microservicio/gradlew --b ./build.gradle test'
       }
     }
 
