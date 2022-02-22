@@ -5,7 +5,6 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -97,5 +96,19 @@ class ServicioCrearReservaTest {
         Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
         //- assert
         assertEquals(220000L,costoReserva);
+    }
+
+
+    @Test
+    @DisplayName("Deberia calcular la fecha si el día siguiente es domingo")
+    void deberiaCalcularFechaReservaDomingo() {
+        // arrange
+        LocalDate fecha = LocalDate.of(2022,02,19);
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        // act
+        LocalDate fechaReserva = servicioCrearReserva.calcularFechaReserva(fecha);
+        //- assert
+        assertEquals(LocalDate.of(2022,02,21),fechaReserva);
     }
 }

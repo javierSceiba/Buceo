@@ -23,8 +23,9 @@ public class ServicioCrearReserva {
     }
 
     public Long ejecutar(Reserva reserva) {
+        LocalDate fechaHoy = LocalDate.now();
         validarReservaActiva(reserva);
-        reserva.setFechaReserva(calcularFechaReserva());
+        reserva.setFechaReserva(calcularFechaReserva(fechaHoy));
         reserva.setCostoReserva(calcularCostoReserva(reserva));
         return this.repositorioReserva.crear(reserva);
     }
@@ -36,8 +37,7 @@ public class ServicioCrearReserva {
                 }
     }
 
-    public LocalDate calcularFechaReserva(){
-        LocalDate fechaHoy = LocalDate.now();
+    public LocalDate calcularFechaReserva(LocalDate fechaHoy){
         fechaHoy = fechaHoy.plusDays(UNO);
         if(fechaHoy.getDayOfWeek() == DayOfWeek.SUNDAY){
             fechaHoy = fechaHoy.plusDays(UNO);
