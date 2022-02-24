@@ -6,8 +6,9 @@ import com.ceiba.reserva.modelo.dto.DtoReserva;
 public interface DaoReserva {
 
     /**
-     * Permite listar usuarios
-     * @return los usuarios
+     * Permite listar una reserva
+     * @param id
+     * @return reserva
      */
     DtoReserva listar(Long id);
 }

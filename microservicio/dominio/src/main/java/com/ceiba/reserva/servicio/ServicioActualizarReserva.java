@@ -41,7 +41,7 @@ public class ServicioActualizarReserva {
             throw new ExcepcionValorInvalido(LA_FECHA_DE_RESERVA_NO_ES_VALIDA);
         }
     }
-   public Long calcularCostoReserva(Reserva reserva){
+   protected Long calcularCostoReserva(Reserva reserva){
         Long costoReserva = TARIFA_FIJA +  calcularPorcentaje(VEINTE);
         if(reserva.getFechaReserva().getDayOfWeek() == DayOfWeek.SATURDAY){
             costoReserva =  costoReserva + calcularPorcentaje(DIEZ);

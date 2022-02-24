@@ -37,7 +37,7 @@ public class ServicioCrearReserva {
                 }
     }
 
-    public LocalDate calcularFechaReserva(LocalDate fechaHoy){
+    protected LocalDate calcularFechaReserva(LocalDate fechaHoy){
         fechaHoy = fechaHoy.plusDays(UNO);
         if(fechaHoy.getDayOfWeek() == DayOfWeek.SUNDAY){
             fechaHoy = fechaHoy.plusDays(UNO);
@@ -45,7 +45,7 @@ public class ServicioCrearReserva {
         return fechaHoy;
     }
 
-    public Long calcularCostoReserva(Reserva reserva){
+    protected Long calcularCostoReserva(Reserva reserva){
         Long costoReserva = TARIFA_FIJA;
         if(reserva.getFechaReserva().getDayOfWeek() == DayOfWeek.SATURDAY){
             costoReserva =  costoReserva + calcularPorcentaje(DIEZ);
@@ -56,7 +56,7 @@ public class ServicioCrearReserva {
         return costoReserva;
     }
 
-    public Long calcularPorcentaje(Integer porcentaje){
+    private Long calcularPorcentaje(Integer porcentaje){
         return ((TARIFA_FIJA * porcentaje) / CIEN);
     }
 }
