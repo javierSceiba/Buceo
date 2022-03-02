@@ -49,10 +49,8 @@ class ServicioCrearReservaTest {
     void deberiaCalcularCostoNativo() {
         // arrange
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).build();
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
         // act
-        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        Long costoReserva = reserva.calcularCostoReserva(true);
         //- assert
         assertEquals(160000L,costoReserva);
     }
@@ -63,10 +61,8 @@ class ServicioCrearReservaTest {
         // arrange
         LocalDate fechaReserva = LocalDate.of(2022,02,19);
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
         // act
-        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        Long costoReserva = reserva.calcularCostoReserva(true);
         //- assert
         assertEquals(180000L,costoReserva);
     }
@@ -76,10 +72,8 @@ class ServicioCrearReservaTest {
     void deberiaCalcularCostoTurista() {
         // arrange
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).build();
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
         // act
-        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        Long costoReserva = reserva.calcularCostoReserva(true);
         //- assert
         assertEquals(200000L,costoReserva);
     }
@@ -90,10 +84,8 @@ class ServicioCrearReservaTest {
         // arrange
         LocalDate fechaReserva = LocalDate.of(2022,02,19);
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
         // act
-        Long costoReserva = servicioCrearReserva.calcularCostoReserva(reserva);
+        Long costoReserva = reserva.calcularCostoReserva(true);
         //- assert
         assertEquals(220000L,costoReserva);
     }
@@ -104,10 +96,9 @@ class ServicioCrearReservaTest {
     void deberiaCalcularFechaReservaDomingo() {
         // arrange
         LocalDate fecha = LocalDate.of(2022,02,19);
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva);
+        Reserva reserva = new ReservaTestDataBuilder().build();
         // act
-        LocalDate fechaReserva = servicioCrearReserva.calcularFechaReserva(fecha);
+        LocalDate fechaReserva = reserva.calcularFechaReserva(fecha);
         //- assert
         assertEquals(LocalDate.of(2022,02,21),fechaReserva);
     }

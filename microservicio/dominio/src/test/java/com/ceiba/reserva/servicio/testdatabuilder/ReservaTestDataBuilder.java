@@ -3,7 +3,6 @@ package com.ceiba.reserva.servicio.testdatabuilder;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class ReservaTestDataBuilder {
 
@@ -11,14 +10,12 @@ public class ReservaTestDataBuilder {
     private String nombreCliente;
     private Integer tipoUsuario;
     private Integer numeroDocumento;
-    private Long costoReserva;
     private LocalDate fechaReserva;
 
     public ReservaTestDataBuilder() {
         nombreCliente = "Antonio";
         tipoUsuario = 1;
         numeroDocumento = 1018;
-        costoReserva = Long.valueOf(200000);
         fechaReserva = LocalDate.now();
     }
 
@@ -49,6 +46,6 @@ public class ReservaTestDataBuilder {
     }
 
     public Reserva build() {
-        return new Reserva(id, nombreCliente, tipoUsuario, numeroDocumento, costoReserva, fechaReserva);
+        return new Reserva(id, nombreCliente, tipoUsuario, numeroDocumento, fechaReserva);
     }
 }

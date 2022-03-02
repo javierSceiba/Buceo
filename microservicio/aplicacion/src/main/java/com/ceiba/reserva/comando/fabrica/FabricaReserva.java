@@ -13,7 +13,6 @@ public class FabricaReserva {
                 comandoReserva.getNombreCliente(),
                 comandoReserva.getTipoUsuario(),
                 comandoReserva.getNumeroDocumento(),
-                comandoReserva.getCostoReserva(),
                 comandoReserva.getFechaReserva()
         );
     }
