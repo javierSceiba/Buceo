@@ -51,14 +51,14 @@ public class Reserva {
     }
 
     public Long calcularCostoReserva(Boolean crear){
-        Long costoReserva = Boolean.TRUE.equals(crear) ? TARIFA_FIJA : (TARIFA_FIJA +  calcularPorcentaje(PORCENTAJE_POR_ACTUALIZAR_RESERVA));
+        Long costo = Boolean.TRUE.equals(crear) ? TARIFA_FIJA : (TARIFA_FIJA +  calcularPorcentaje(PORCENTAJE_POR_ACTUALIZAR_RESERVA));
         if(this.fechaReserva.getDayOfWeek() == DayOfWeek.SATURDAY){
-            costoReserva =  costoReserva + calcularPorcentaje(PORCENTAJE_POR_DIA_SABADO);
+            costo =  costo + calcularPorcentaje(PORCENTAJE_POR_DIA_SABADO);
         }
         if(this.tipoUsuario == NATIVO){
-            costoReserva =  costoReserva - calcularPorcentaje(PORCENTAJE_POR_SER_NATIVO);
+            costo =  costo - calcularPorcentaje(PORCENTAJE_POR_SER_NATIVO);
         }
-        return costoReserva;
+        return costo;
     }
 
     private Long calcularPorcentaje(Integer porcentaje){
