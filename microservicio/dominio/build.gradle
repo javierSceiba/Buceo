@@ -10,7 +10,6 @@ buildscript {
 
 plugins {
 	id 'info.solidsoft.pitest'
-	id 'jacoco'
 }
 
 apply plugin: 'java'

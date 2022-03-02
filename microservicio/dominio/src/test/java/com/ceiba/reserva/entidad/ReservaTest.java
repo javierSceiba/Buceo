@@ -70,21 +70,9 @@ class ReservaTest {
         // arrange
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(true);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(160000L,costoReserva);
-    }
-
-    @Test
-    @DisplayName("Deberia calcular el costo de la creacion de la reserva para tipo de usuario nativo un sabado")
-    void deberiaCalcularCostoNativoSabado() {
-        // arrange
-        LocalDate fechaReserva = LocalDate.of(2022,02,19);
-        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
-        // act
-        Long costoReserva = reserva.calcularCostoReserva(true);
-        //- assert
-        assertEquals(180000L,costoReserva);
     }
 
     @Test
@@ -93,42 +81,19 @@ class ReservaTest {
         // arrange
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(true);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(200000L,costoReserva);
     }
 
     @Test
-    @DisplayName("Deberia calcular el costo de la creacion de la reserva para tipo de usuario turista un día sabado")
-    void deberiaCalcularCostoTuristaSabado() {
-        // arrange
-        LocalDate fechaReserva = LocalDate.of(2022,02,19);
-        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
-        // act
-        Long costoReserva = reserva.calcularCostoReserva(true);
-        //- assert
-        assertEquals(220000L,costoReserva);
-    }
-
-
-    @Test
-    @DisplayName("Deberia calcular la fecha si el día siguiente es domingo")
-    void deberiaCalcularFechaReservaDomingo() {
-        // arrange
-        LocalDate fecha = LocalDate.of(2022,02,19);
-        Reserva reserva = new ReservaTestDataBuilder().build();
-        // act
-        LocalDate fechaReserva = reserva.calcularFechaReserva(fecha);
-        //- assert
-        assertEquals(LocalDate.of(2022,02,21),fechaReserva);
-    }
-    @Test
     @DisplayName("Deberia calcular el costo de la actualizacion de la reserva para tipo de usuario nativo")
     void deberiaCalcularCostoActualizacionNativo() {
         // arrange
-        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).build();
+        LocalDate fechaReserva = LocalDate.now();
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(false);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(200000L,costoReserva);
     }
@@ -139,7 +104,7 @@ class ReservaTest {
         LocalDate fechaReserva = LocalDate.of(2022,02,19);
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(1).conFechaReserva(fechaReserva).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(false);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(220000L,costoReserva);
     }
@@ -148,9 +113,10 @@ class ReservaTest {
     @DisplayName("Deberia calcular el costo de la actualizacion de la reserva para tipo de usuario turista")
     void deberiaCalcularCostoActualizacionTurista() {
         // arrange
-        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).build();
+        LocalDate fechaReserva = LocalDate.now();
+        Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(false);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(240000L,costoReserva);
     }
@@ -162,7 +128,7 @@ class ReservaTest {
         LocalDate fechaReserva = LocalDate.of(2022,02,19);
         Reserva reserva = new ReservaTestDataBuilder().conTipoUsuario(2).conFechaReserva(fechaReserva).build();
         // act
-        Long costoReserva = reserva.calcularCostoReserva(false);
+        Long costoReserva = reserva.getCostoReserva();
         //- assert
         assertEquals(260000L,costoReserva);
     }

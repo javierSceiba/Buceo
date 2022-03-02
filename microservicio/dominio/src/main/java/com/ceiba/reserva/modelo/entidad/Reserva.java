@@ -42,7 +42,7 @@ public class Reserva {
         this.costoReserva = (fechaReserva == null) ? calcularCostoReserva(true) : calcularCostoReserva(false) ;
     }
 
-    public LocalDate calcularFechaReserva(LocalDate fechaHoy){
+    private LocalDate calcularFechaReserva(LocalDate fechaHoy){
         fechaHoy = fechaHoy.plusDays(UN_DIA);
         if(fechaHoy.getDayOfWeek() == DayOfWeek.SUNDAY){
             fechaHoy = fechaHoy.plusDays(UN_DIA);
@@ -50,7 +50,7 @@ public class Reserva {
         return fechaHoy;
     }
 
-    public Long calcularCostoReserva(Boolean crear){
+    private Long calcularCostoReserva(Boolean crear){
         Long costo = Boolean.TRUE.equals(crear) ? TARIFA_FIJA : (TARIFA_FIJA +  calcularPorcentaje(PORCENTAJE_POR_ACTUALIZAR_RESERVA));
         if(this.fechaReserva.getDayOfWeek() == DayOfWeek.SATURDAY){
             costo =  costo + calcularPorcentaje(PORCENTAJE_POR_DIA_SABADO);

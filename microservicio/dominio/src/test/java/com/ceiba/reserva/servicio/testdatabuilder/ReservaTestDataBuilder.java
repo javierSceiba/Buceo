@@ -16,7 +16,6 @@ public class ReservaTestDataBuilder {
         nombreCliente = "Antonio";
         tipoUsuario = 1;
         numeroDocumento = 1018;
-        fechaReserva = LocalDate.now();
     }
 
     public ReservaTestDataBuilder conId(Long id) {
