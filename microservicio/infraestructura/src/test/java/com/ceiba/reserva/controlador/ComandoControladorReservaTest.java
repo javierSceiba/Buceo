@@ -56,4 +56,29 @@ class ComandoControladorReservaTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DisplayName("Deberia no actualizar un usuario")
+    void deberiaNoActualizarUnUsuario() throws Exception{
+        // arrange
+        Long id = 100L;
+        ComandoReserva reserva = new ComandoReservaTestDataBuilder().build();
+        // act - assert
+        mocMvc.perform(put("/buceo/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(reserva)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Deberia no crear un usuario")
+    void deberiaNoCrearUnUsuario() throws Exception{
+        // arrange
+        ComandoReserva reserva = new ComandoReservaTestDataBuilder().conTipoUsuario(null).build();
+        // act - assert
+        mocMvc.perform(post("/buceo")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(reserva)))
+                .andExpect(status().isBadRequest());
+    }
+
 }

@@ -24,7 +24,7 @@ class ReservaTest {
         assertEquals(1, reserva.getId());
         assertEquals("Antonio", reserva.getNombreCliente());
         assertEquals(1, reserva.getTipoUsuario());
-        assertEquals(220000,reserva.getCostoReserva());
+        assertEquals(200000,reserva.getCostoReserva());
         assertEquals(fechaReserva, reserva.getFechaReserva());
     }
 
@@ -95,7 +95,7 @@ class ReservaTest {
         // act
         Long costoReserva = reserva.getCostoReserva();
         //- assert
-        assertEquals(220000L,costoReserva);
+        assertEquals(200000L,costoReserva);
     }
     @Test
     @DisplayName("Deberia calcular el costo de la actualizacion de la reserva para tipo de usuario nativo un sabado")
@@ -118,7 +118,7 @@ class ReservaTest {
         // act
         Long costoReserva = reserva.getCostoReserva();
         //- assert
-        assertEquals(260000L,costoReserva);
+        assertEquals(240000L,costoReserva);
     }
 
     @Test
